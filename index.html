@@ -4,115 +4,1531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servidor Ativo - RMJ Soluções</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    <title>RMJ Soluções – Estruturas para Indústria, Agro e Comércio</title>
+    <meta name="description"
+        content="O Grupo RMJ Soluções é especializado em projetos de estruturas metálicas, estufas agrícolas, telados e galpões para o setor industrial, agrícola e comercial. Solicite um orçamento.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+    <style>
+        /* ===================== DESIGN TOKENS ===================== */
+        :root {
+            --blue: #3C58A5;
+            --blue-dark: #2a3e7a;
+            --blue-light: #5271c4;
+            --blue-muted: rgba(60, 88, 165, 0.12);
+            --red: #EC3238;
+            --red-dark: #c51e23;
+            --red-muted: rgba(236, 50, 56, 0.12);
+            --black: #0a0a0c;
+            --black-soft: #12141a;
+            --gray-90: #1c1e26;
+            --gray-80: #2c2e38;
+            --gray-60: #6b6f82;
+            --gray-40: #a8acbd;
+            --gray-10: #f0f1f5;
+            --white: #ffffff;
+            --off-white: #f8f9fc;
+
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 28px;
+            --radius-xl: 40px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.14);
+            --shadow-lg: 0 20px 56px rgba(0, 0, 0, 0.2);
         }
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem 4rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            max-width: 600px;
-            width: 90%;
-            animation: fadeIn 1s ease-out;
+        /* ===================== RESET ===================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===================== TYPOGRAPHY ===================== */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #00f2fe, #4facfe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-weight: 800;
         }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #d1d5db;
-            margin-bottom: 2rem;
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
         }
 
-        .status {
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        /* ===================== NAV ===================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 72px;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background var(--transition);
+        }
+
+        .nav-logo {
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo svg {
+            height: 28px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.6);
+            transition: all var(--transition);
+        }
+
+        .nav-icon:hover {
+            border-color: var(--blue-light);
+            color: var(--blue-light);
+        }
+
+        .nav-cta {
+            background: var(--blue);
+            color: var(--white) !important;
+            font-weight: 700;
+            font-size: 0.875rem;
+            padding: 0.55rem 1.4rem;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--blue-light);
+        }
+
+        /* ===================== HERO ===================== */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 2.5rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1585813755971-7a3d1e9de61d?w=1800&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) saturate(0.6);
+            transform: scale(1.04);
+            transition: transform 10s ease;
+        }
+
+        #hero:hover .hero-bg {
+            transform: scale(1);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                    rgba(10, 10, 12, 0.97) 0%,
+                    rgba(10, 10, 12, 0.55) 45%,
+                    rgba(60, 88, 165, 0.12) 100%);
+        }
+
+        /* blue left stripe accent */
+        .hero-stripe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--blue), var(--red));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            max-width: 680px;
+        }
+
+        .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 50px;
-            color: #10b981;
+            background: var(--blue-muted);
+            border: 1px solid rgba(60, 88, 165, 0.35);
+            color: #89a4e8;
+            font-size: 0.8rem;
             font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
         }
 
-        .pulse {
-            width: 10px;
-            height: 10px;
-            background-color: #10b981;
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--blue-light);
             border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            animation: pulse 2s infinite;
+            animation: blink 2s ease infinite;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
+        @keyframes blink {
 
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-            }
-
+            0%,
             100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--blue-light), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.55);
+            max-width: 520px;
+            margin: 1.25rem 0 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--red);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(236, 50, 56, 0.35);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* hero stat card */
+        .hero-stats {
+            flex-shrink: 0;
+            width: 220px;
+            background: var(--blue);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.75rem;
+        }
+
+        .hero-stats .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.75rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--white);
+        }
+
+        .hero-stats .stat-lbl {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+            margin-top: 0.4rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.4;
+        }
+
+        .hero-stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        .hero-stars svg {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-g {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* ============================================================ */
+        /* SECTION BASE */
+        /* ============================================================ */
+        section {
+            padding: 6rem 2.5rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .eyebrow-line {
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        /* ============================================================ */
+        /* SOLUÇÕES */
+        /* ============================================================ */
+        #solucoes {
+            background: var(--off-white);
+        }
+
+        #solucoes .eyebrow {
+            color: var(--blue);
+        }
+
+        #solucoes .eyebrow-line {
+            background: var(--blue);
+        }
+
+        #solucoes h2,
+        #solucoes p {
+            color: var(--black);
+        }
+
+        .sol-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .sol-intro {
+            max-width: 440px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--gray-60);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .sol-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 300px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .sol-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sol-card .card-body {
+            padding: 2.25rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sol-card h3 {
+            font-size: 1.5rem;
+            color: var(--black);
+            margin-bottom: 0.75rem;
+        }
+
+        .sol-card p {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--gray-60);
+            flex: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.9rem 0;
+        }
+
+        .tag {
+            background: var(--gray-10);
+            color: #44475a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--black);
+            border: 1.5px solid var(--black);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            transition: all var(--transition);
+            width: fit-content;
+            margin-top: 0.75rem;
+        }
+
+        .card-link:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .sol-card .card-img {
+            overflow: hidden;
+        }
+
+        .sol-card .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .sol-card:hover .card-img img {
+            transform: scale(1.06);
+        }
+
+        /* dark card variant */
+        .sol-card.dark {
+            background: var(--black-soft);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sol-card.dark h3 {
+            color: var(--white);
+        }
+
+        .sol-card.dark p {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .sol-card.dark .tag {
+            background: rgba(255, 255, 255, 0.07);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--red);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.875rem;
+            padding: 0.65rem 1.35rem;
+            border-radius: 100px;
+            margin-top: 1rem;
+            width: fit-content;
+            transition: all var(--transition);
+        }
+
+        .wa-btn:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================ */
+        /* QUEM SOMOS */
+        /* ============================================================ */
+        #quemsomos {
+            background: var(--black-soft);
+        }
+
+        #quemsomos .eyebrow {
+            color: var(--blue-light);
+        }
+
+        #quemsomos .eyebrow-line {
+            background: var(--blue-light);
+        }
+
+        .qs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .qs-left h2 {
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+
+        .qs-left p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 2rem;
+        }
+
+        .setores {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .setor {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .setor::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
+            flex-shrink: 0;
+        }
+
+        .qs-right {
+            position: relative;
+        }
+
+        .qs-img-wrap {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .qs-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .qs-badge {
+            position: absolute;
+            bottom: -1.5rem;
+            left: -1.5rem;
+            background: var(--blue);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 1.75rem;
+        }
+
+        .qs-badge .bn {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .qs-badge .bt {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            opacity: 0.75;
+            line-height: 1.4;
+        }
+
+        /* ============================================================ */
+        /* DIFERENCIAIS */
+        /* ============================================================ */
+        #diferenciais {
+            background: var(--gray-10);
+        }
+
+        #diferenciais .eyebrow {
+            color: var(--blue);
+        }
+
+        #diferenciais .eyebrow-line {
+            background: var(--blue);
+        }
+
+        #diferenciais h2 {
+            color: var(--black);
+        }
+
+        .dif-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 3rem;
+        }
+
+        .dif-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .dif-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(60, 88, 165, 0.25);
+        }
+
+        .dif-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1.25rem;
+            background: var(--blue-muted);
+        }
+
+        .dif-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .dif-card p {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--gray-60);
+        }
+
+        /* highlight card */
+        .dif-card.highlight {
+            background: var(--blue);
+            border-color: transparent;
+        }
+
+        .dif-card.highlight h4 {
+            color: var(--white);
+        }
+
+        .dif-card.highlight p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .dif-card.highlight .dif-icon {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ============================================================ */
+        /* PARCEIROS */
+        /* ============================================================ */
+        #parceiros {
+            background: var(--black);
+        }
+
+        #parceiros .eyebrow {
+            color: var(--blue-light);
+        }
+
+        #parceiros .eyebrow-line {
+            background: var(--blue-light);
+        }
+
+        .par-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .par-header h2 {
+            color: var(--white);
+        }
+
+        .par-header p {
+            max-width: 380px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .par-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .par-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition);
+        }
+
+        .par-chip:hover {
+            background: var(--blue-muted);
+            border-color: rgba(60, 88, 165, 0.35);
+            color: var(--white);
+        }
+
+        .par-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(60, 88, 165, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================ */
+        /* CTA */
+        /* ============================================================ */
+        #cta {
+            background: var(--off-white);
+            padding: 5rem 2.5rem;
+        }
+
+        .cta-box {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: var(--black);
+            border-radius: var(--radius-xl);
+            padding: 5rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* decorative blobs */
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(60, 88, 165, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 40%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(236, 50, 56, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-text h2 {
+            color: var(--white);
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+        }
+
+        .cta-text p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 480px;
+            margin-top: 0.75rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-wa-big {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--red);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            transition: all var(--transition);
+        }
+
+        .btn-wa-big:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(236, 50, 56, 0.4);
+        }
+
+        .cta-note {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ============================================================ */
+        /* FOOTER */
+        /* ============================================================ */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 3rem 2.5rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo svg {
+            height: 24px;
+            width: auto;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 0.4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.4);
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================================ */
+        /* ANIMATIONS */
+        /* ============================================================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up:nth-child(1) {
+            transition-delay: 0s;
+        }
+
+        .fade-up:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .fade-up:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .fade-up:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        .fade-up:nth-child(5) {
+            transition-delay: 0.4s;
+        }
+
+        .fade-up:nth-child(6) {
+            transition-delay: 0.5s;
+        }
+
+        /* decorative number */
+        .bg-num {
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Syne', sans-serif;
+            font-size: 18rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.02);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .sol-card {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .sol-card .card-img {
+                height: 220px;
+                order: -1;
+            }
+
+            .dif-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .par-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .qs-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .qs-badge {
+                position: static;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.25rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-icon {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.25rem;
+            }
+
+            #hero {
+                padding: 0 1.25rem 3rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-stats {
+                width: 100%;
+            }
+
+            .sol-header {
+                flex-direction: column;
+            }
+
+            .dif-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .par-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cta-box {
+                padding: 3rem 1.75rem;
+                flex-direction: column;
+            }
+
+            .btn-wa-big {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Servidor Online</h1>
-        <p>Esta é uma página de teste para verificar se o servidor está configurado e respondendo corretamente. Se você
-            está vendo esta tela, tudo está funcionando perfeitamente!</p>
-        <div class="status">
-            <div class="pulse"></div>
-            Servidor Ativo e Respondendo
+
+    <!-- ======= NAV ======= -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo" aria-label="RMJ Soluções - Página inicial">
+            <!-- SVG logo branca inline -->
+            <svg height="30" viewBox="0 0 2900 988" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="Logo RMJ">
+                <!-- Letras RMJ -->
+                <path d="M215.639 193.507H0V987.823H215.639V193.507Z" fill="white" />
+                <path d="M710.33 1.83252H215.646V193.404H710.33V1.83252Z" fill="white" />
+                <path
+                    d="M1707.89 1.83252H1018.74V193.404H803.1V987.721H1018.74V193.501H1325.72V987.817H1541.36V193.501H1848.33V987.817H2063.97V358.009C2063.97 161.314 1904.49 1.83252 1707.89 1.83252Z"
+                    fill="white" />
+                <path
+                    d="M2656.69 1.83252H2441.06V193.404H2651.57V796.052H2156.89V987.624H2511.03C2707.73 987.624 2867.21 828.142 2867.21 631.448V1.83252H2656.69Z"
+                    fill="white" />
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#quemsomos">Quem somos</a></li>
+            <li><a href="#solucoes">Soluções</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#parceiros">Parceiros</a></li>
+        </ul>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+            </svg>
+        </a>
+        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="nav-cta" id="nav-cta">Contato</a>
+    </nav>
+
+
+    <!-- ======= HERO ======= -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-stripe"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-tag">Grupo RMJ Soluções</div>
+                <h1>Soluções em estruturas para <em>indústrias.</em></h1>
+                <p class="hero-sub">Especialistas em projetos personalizados para o setor industrial, agrícola e
+                    comercial — entregando estruturas modernas, resistentes e eficientes.</p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="btn-primary"
+                        id="hero-wa">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                            <path
+                                d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.535 5.858L.057 23.57a.5.5 0 00.611.611l5.712-1.478A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a10 10 0 01-5.108-1.404l-.364-.218-3.79.98.996-3.689-.239-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                        </svg>
+                        Fale no WhatsApp
+                    </a>
+                    <a href="#solucoes" class="btn-outline" id="hero-sol">
+                        Ver soluções
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-num" id="stat-counter">2000+</div>
+                <div class="stat-lbl">Clientes atendidos e satisfeitos</div>
+                <div class="hero-stars">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <div class="hero-g">Google Reviews</div>
+            </div>
         </div>
-    </div>
+    </section>
+
+
+    <!-- ======= SOLUÇÕES ======= -->
+    <section id="solucoes">
+        <div class="container">
+            <div class="sol-header">
+                <div>
+                    <div class="eyebrow"><span class="eyebrow-line"></span> Principais Soluções</div>
+                    <h2>O que a RMJ<br>pode fazer por você</h2>
+                </div>
+                <p class="sol-intro">Desenvolvemos projetos sob medida para proteger, expandir e modernizar operações
+                    rurais, industriais e comerciais em todo o Brasil.</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <!-- Card 1 -->
+                <div class="sol-card fade-up">
+                    <div class="card-body">
+                        <div>
+                            <h3>Estufas e Telados</h3>
+                            <p>Soluções inovadoras e personalizadas para maximizar a produtividade agrícola com proteção
+                                de alta performance e durabilidade.</p>
+                            <div class="tags">
+                                <span class="tag">Estufas agrícolas</span>
+                                <span class="tag">Telados de proteção</span>
+                                <span class="tag">Galpões</span>
+                                <span class="tag">Fruticultura</span>
+                                <span class="tag">Coberturas mistas</span>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="card-link"
+                            id="card-estufas">
+                            Solicitar orçamento
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&q=80"
+                            alt="Interior de estufa agrícola moderna com plantas verdes" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Card 2 – dark -->
+                <div class="sol-card dark fade-up" style="grid-template-columns:1fr 1fr;">
+                    <div class="card-img" style="order:-1;">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+                            alt="Estrutura metálica industrial de grande porte em construção" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>Estruturas Metálicas e Mistas</h3>
+                            <p>Projetos robustos e eficientes para diferentes necessidades, com foco em resistência,
+                                durabilidade e custo-benefício.</p>
+                            <div class="tags">
+                                <span class="tag">Pavilhões industriais</span>
+                                <span class="tag">Coberturas técnicas</span>
+                                <span class="tag">Mezaninos</span>
+                                <span class="tag">Câmaras frias</span>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="wa-btn"
+                            id="card-estruturas">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                                <path
+                                    d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.535 5.858L.057 23.57a.5.5 0 00.611.611l5.712-1.478A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a10 10 0 01-5.108-1.404l-.364-.218-3.79.98.996-3.689-.239-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                            </svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======= QUEM SOMOS ======= -->
+    <section id="quemsomos">
+        <div class="container">
+            <div class="qs-grid">
+                <div class="qs-left">
+                    <div class="eyebrow"><span class="eyebrow-line"></span> Quem Somos</div>
+                    <h2>Criados para atender quem precisa crescer com segurança.</h2>
+                    <p>O Grupo RMJ Soluções foi criado para facilitar o acesso a estruturas, equipamentos e orientação
+                        técnica especializada — presente nos principais segmentos produtivos do Brasil.</p>
+                    <div class="setores">
+                        <div class="setor">Cobertura de pomares</div>
+                        <div class="setor">Cultivo protegido</div>
+                        <div class="setor">Armazenagem de grãos</div>
+                        <div class="setor">Olericultura</div>
+                        <div class="setor">Hidroponia</div>
+                        <div class="setor">Silvicultura</div>
+                        <div class="setor">Pecuária</div>
+                        <div class="setor">Comércio e Indústria</div>
+                    </div>
+                </div>
+                <div class="qs-right">
+                    <div class="qs-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
+                            alt="Campo agrícola com vegetação e estruturas ao fundo" loading="lazy">
+                    </div>
+                    <div class="qs-badge">
+                        <div class="bn">+2000</div>
+                        <div class="bt">Projetos entregues<br>com sucesso</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======= DIFERENCIAIS ======= -->
+    <section id="diferenciais">
+        <div class="container">
+            <div class="eyebrow"><span class="eyebrow-line"></span> Por que a RMJ</div>
+            <h2>Nossos diferenciais</h2>
+
+            <div class="dif-grid">
+                <div class="dif-card fade-up">
+                    <div class="dif-icon">🎯</div>
+                    <h4>Atendimento Personalizado</h4>
+                    <p>Cada cliente tem necessidades únicas. Estamos presentes do primeiro contato à entrega final do
+                        projeto.</p>
+                </div>
+                <div class="dif-card highlight fade-up">
+                    <div class="dif-icon">📐</div>
+                    <h4>Projetos Sob Medida</h4>
+                    <p>Desenvolvemos soluções adaptadas às dimensões e exigências técnicas específicas de cada operação.
+                    </p>
+                </div>
+                <div class="dif-card fade-up">
+                    <div class="dif-icon">🏗️</div>
+                    <h4>Alta Durabilidade</h4>
+                    <p>Estruturas projetadas com materiais de alta qualidade para suportar as condições mais exigentes.
+                    </p>
+                </div>
+                <div class="dif-card fade-up">
+                    <div class="dif-icon">👷</div>
+                    <h4>Equipe Especializada</h4>
+                    <p>Time técnico experiente nos setores agrícola, industrial e comercial, pronto para orientar cada
+                        etapa.</p>
+                </div>
+                <div class="dif-card fade-up">
+                    <div class="dif-icon">🌐</div>
+                    <h4>Múltiplos Setores</h4>
+                    <p>Presença consolidada no agronegócio, indústria e comércio. Soluções integradas para toda a
+                        cadeia.</p>
+                </div>
+                <div class="dif-card fade-up">
+                    <div class="dif-icon">🤝</div>
+                    <h4>Parcerias Estratégicas</h4>
+                    <p>Rede de parceiros certificados que ampliam o portfólio de soluções complementares disponíveis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======= PARCEIROS ======= -->
+    <section id="parceiros">
+        <div class="container" style="position:relative;">
+            <div class="bg-num">07</div>
+            <div class="par-header">
+                <div>
+                    <div class="eyebrow"><span class="eyebrow-line"></span> Soluções Complementares</div>
+                    <h2>Muito além<br>das estruturas</h2>
+                </div>
+                <p>Além dos projetos estruturais, oferecemos um portfólio completo para sua operação ser ainda mais
+                    eficiente e sustentável.</p>
+            </div>
+
+            <div class="par-grid">
+                <div class="par-chip fade-up">
+                    <div class="par-icon">☀️</div> Energia Fotovoltaica
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">🧱</div> Painéis Isotérmicos
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">🏠</div> Telhas Termoacústicas
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">🔷</div> Policarbonato
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">🌲</div> Madeiras Tratadas
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">📦</div> Sistemas de Armazenagem
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">🗃️</div> Contentores Plásticos
+                </div>
+                <div class="par-chip fade-up">
+                    <div class="par-icon">⚙️</div> Equipamentos Técnicos
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======= CTA ======= -->
+    <section id="cta">
+        <div class="cta-box">
+            <div class="cta-text">
+                <h2>Pronto para transformar<br>sua estrutura?</h2>
+                <p>Solicite um orçamento sem compromisso e descubra a melhor solução estrutural para sua empresa,
+                    propriedade rural ou indústria.</p>
+            </div>
+            <div class="cta-actions">
+                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="btn-wa-big" id="main-cta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                        <path
+                            d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.535 5.858L.057 23.57a.5.5 0 00.611.611l5.712-1.478A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a10 10 0 01-5.108-1.404l-.364-.218-3.79.98.996-3.689-.239-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                    </svg>
+                    Falar no WhatsApp
+                </a>
+                <p class="cta-note">Atendimento rápido · Orçamento sem compromisso</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======= FOOTER ======= -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">
+                    <svg height="22" viewBox="0 0 2900 988" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-label="RMJ Soluções" role="img">
+                        <path d="M215.639 193.507H0V987.823H215.639V193.507Z" fill="white" />
+                        <path d="M710.33 1.83252H215.646V193.404H710.33V1.83252Z" fill="white" />
+                        <path
+                            d="M1707.89 1.83252H1018.74V193.404H803.1V987.721H1018.74V193.501H1325.72V987.817H1541.36V193.501H1848.33V987.817H2063.97V358.009C2063.97 161.314 1904.49 1.83252 1707.89 1.83252Z"
+                            fill="white" />
+                        <path
+                            d="M2656.69 1.83252H2441.06V193.404H2651.57V796.052H2156.89V987.624H2511.03C2707.73 987.624 2867.21 828.142 2867.21 631.448V1.83252H2656.69Z"
+                            fill="white" />
+                    </svg>
+                </div>
+                <p class="footer-copy">© 2025 Grupo RMJ Soluções · Todos os direitos reservados</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#quemsomos">Quem somos</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#parceiros">Parceiros</a></li>
+                <li><a href="https://wa.me/5500000000000" target="_blank" rel="noopener">Contato</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <!-- ======= SCRIPTS ======= -->
+    <script>
+        // Scroll-triggered animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Nav background
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.style.background = window.scrollY > 60
+                ? 'rgba(10,10,12,0.96)'
+                : 'rgba(10,10,12,0.7)';
+        }, { passive: true });
+
+        // Counter animation
+        function animateCounter(el, target, duration = 1600) {
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = Math.floor(start).toLocaleString('pt-BR') + '+';
+                if (start >= target) clearInterval(timer);
+            }, 16);
+        }
+
+        const counter = document.getElementById('stat-counter');
+        const cObs = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) { animateCounter(counter, 2000); cObs.disconnect(); }
+        }, { threshold: 0.5 });
+        if (counter) cObs.observe(counter);
+    </script>
+
 </body>
 
 </html>
