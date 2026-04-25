@@ -137,8 +137,9 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 0.5rem;
             list-style: none;
+            position: relative;
         }
 
         .nav-links a {
@@ -146,10 +147,28 @@
             font-weight: 500;
             color: rgba(255, 255, 255, 0.6);
             transition: color var(--transition);
+            padding: 0.5rem 1rem;
+            position: relative;
+            z-index: 2;
+            display: block;
         }
 
         .nav-links a:hover {
             color: var(--white);
+        }
+
+        .nav-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            z-index: 1;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            list-style: none;
         }
 
         .nav-icon {
@@ -1392,6 +1411,29 @@
             if (entries[0].isIntersecting) { animateCounter(counter, 2000); cObs.disconnect(); }
         }, { threshold: 0.5 });
         if (counter) cObs.observe(counter);
+
+        // Nav hover indicator
+        const navLinksList = document.querySelector('.nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        if (navLinksList && navLinksItems.length > 0) {
+            const indicator = document.createElement('li');
+            indicator.className = 'nav-indicator';
+            navLinksList.appendChild(indicator);
+
+            navLinksItems.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    const rect = link.getBoundingClientRect();
+                    const parentRect = navLinksList.getBoundingClientRect();
+                    indicator.style.width = `${rect.width}px`;
+                    indicator.style.transform = `translateX(${rect.left - parentRect.left}px)`;
+                    indicator.style.opacity = '1';
+                });
+            });
+
+            navLinksList.addEventListener('mouseleave', () => {
+                indicator.style.opacity = '0';
+            });
+        }
 
         // Galeria fetch
         fetch('api.php')
