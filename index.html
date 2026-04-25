@@ -546,7 +546,7 @@
             color: var(--white);
         }
 
-        .sol-card.dark p {
+        #solucoes .sol-card.dark p {
             color: rgba(255, 255, 255, 0.85);
         }
 
@@ -1020,6 +1020,54 @@
             transition-delay: 0.5s;
         }
 
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .fade-in.visible { opacity: 1; }
+
+        .fade-right {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+        .fade-left {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-left.visible { opacity: 1; transform: translateX(0); }
+
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .scale-up.visible { opacity: 1; transform: scale(1); }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-text > * {
+            animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+        }
+        .hero-text .hero-tag { animation-delay: 0.1s; }
+        .hero-text h1 { animation-delay: 0.2s; }
+        .hero-text .hero-sub { animation-delay: 0.3s; }
+        .hero-text .hero-actions { animation-delay: 0.4s; }
+        .hero-stats {
+            animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s;
+            opacity: 0;
+        }
+
         /* decorative number */
         .bg-num {
             position: absolute;
@@ -1226,11 +1274,11 @@
     <section id="solucoes">
         <div class="container">
             <div class="sol-header">
-                <div>
+                <div class="fade-right">
                     <div class="eyebrow"><span class="eyebrow-line"></span> Principais Soluções</div>
                     <h2>O que a RMJ<br>pode fazer por você</h2>
                 </div>
-                <p class="sol-intro">Desenvolvemos projetos sob medida para proteger, expandir e modernizar operações
+                <p class="sol-intro fade-left">Desenvolvemos projetos sob medida para proteger, expandir e modernizar operações
                     rurais, industriais e comerciais em todo o Brasil.</p>
             </div>
 
@@ -1307,11 +1355,11 @@
         <div class="container">
             <div class="qs-grid">
                 <div class="qs-left">
-                    <div class="eyebrow"><span class="eyebrow-line"></span> Quem Somos</div>
-                    <h2>Criados para atender quem precisa crescer com segurança.</h2>
-                    <p>O Grupo RMJ Soluções foi criado para facilitar o acesso a estruturas, equipamentos e orientação
+                    <div class="eyebrow fade-up"><span class="eyebrow-line"></span> Quem Somos</div>
+                    <h2 class="fade-up delay-100">Criados para atender quem precisa crescer com segurança.</h2>
+                    <p class="fade-up delay-200">O Grupo RMJ Soluções foi criado para facilitar o acesso a estruturas, equipamentos e orientação
                         técnica especializada — presente nos principais segmentos produtivos do Brasil.</p>
-                    <div class="setores">
+                    <div class="setores fade-up delay-300">
                         <div class="setor">Cobertura de pomares</div>
                         <div class="setor">Cultivo protegido</div>
                         <div class="setor">Armazenagem de grãos</div>
@@ -1322,7 +1370,7 @@
                         <div class="setor">Comércio e Indústria</div>
                     </div>
                 </div>
-                <div class="qs-right">
+                <div class="qs-right scale-up">
                     <div class="qs-img-wrap">
                         <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
                             alt="Campo agrícola com vegetação e estruturas ao fundo" loading="lazy">
@@ -1340,8 +1388,8 @@
     <!-- ======= DIFERENCIAIS ======= -->
     <section id="diferenciais">
         <div class="container">
-            <div class="eyebrow"><span class="eyebrow-line"></span> Por que a RMJ</div>
-            <h2>Nossos diferenciais</h2>
+            <div class="eyebrow fade-up"><span class="eyebrow-line"></span> Por que a RMJ</div>
+            <h2 class="fade-up delay-100">Nossos diferenciais</h2>
 
             <div class="dif-grid">
                 <div class="dif-card fade-up">
@@ -1414,11 +1462,11 @@
         <div class="container" style="position:relative;">
             <div class="bg-num">07</div>
             <div class="par-header">
-                <div>
+                <div class="fade-right">
                     <div class="eyebrow"><span class="eyebrow-line"></span> Soluções Complementares</div>
                     <h2>Muito além<br>das estruturas</h2>
                 </div>
-                <p>Além dos projetos estruturais, oferecemos um portfólio completo para sua operação ser ainda mais
+                <p class="fade-left">Além dos projetos estruturais, oferecemos um portfólio completo para sua operação ser ainda mais
                     eficiente e sustentável.</p>
             </div>
 
@@ -1487,12 +1535,12 @@
     <!-- ======= CTA ======= -->
     <section id="cta">
         <div class="cta-box">
-            <div class="cta-text">
+            <div class="cta-text fade-right">
                 <h2>Pronto para transformar<br>sua estrutura?</h2>
                 <p>Solicite um orçamento sem compromisso e descubra a melhor solução estrutural para sua empresa,
                     propriedade rural ou indústria.</p>
             </div>
-            <div class="cta-actions">
+            <div class="cta-actions fade-left">
                 <a href="https://wa.me/5547999908669?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn-wa-big" id="main-cta">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path
@@ -1535,7 +1583,7 @@
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up, .fade-in, .fade-right, .fade-left, .scale-up').forEach(el => observer.observe(el));
 
         // Nav background
         const navbar = document.getElementById('navbar');
