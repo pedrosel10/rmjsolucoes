@@ -170,7 +170,7 @@
         }
 
         .nav-cta {
-            background: var(--blue);
+            background: linear-gradient(135deg, var(--blue) 0%, #5a76c8 100%);
             color: var(--white) !important;
             font-weight: 700;
             font-size: 0.875rem;
@@ -180,7 +180,8 @@
         }
 
         .nav-cta:hover {
-            background: var(--blue-light);
+            background: linear-gradient(135deg, #5a76c8 0%, var(--blue) 100%);
+            transform: translateY(-1px);
         }
 
         /* ===================== HERO ===================== */
@@ -307,7 +308,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            background: var(--red);
+            background: linear-gradient(135deg, #ff4b51 0%, var(--red) 100%);
             color: var(--white);
             font-weight: 700;
             font-size: 0.95rem;
@@ -317,7 +318,7 @@
         }
 
         .btn-primary:hover {
-            background: var(--red-dark);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(236, 50, 56, 0.35);
         }
@@ -355,7 +356,8 @@
         }
 
         .btn-outline-dark:hover {
-            background: var(--black);
+            background: linear-gradient(135deg, var(--black) 0%, #222228 100%);
+            border-color: var(--black);
             color: var(--white);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -547,8 +549,10 @@
         }
 
         .card-link:hover {
-            background: var(--black);
+            background: linear-gradient(135deg, var(--black) 0%, #222228 100%);
+            border-color: var(--black);
             color: var(--white);
+            transform: translateY(-2px);
         }
 
         .sol-card .card-img {
@@ -590,7 +594,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            background: var(--red);
+            background: linear-gradient(135deg, #ff4b51 0%, var(--red) 100%);
             color: var(--white);
             font-weight: 700;
             font-size: 0.875rem;
@@ -602,8 +606,9 @@
         }
 
         .wa-btn:hover {
-            background: var(--red-dark);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(236, 50, 56, 0.35);
         }
 
         /* ============================================================ */
@@ -918,7 +923,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: var(--red);
+            background: linear-gradient(135deg, #ff4b51 0%, var(--red) 100%);
             color: var(--white);
             font-weight: 700;
             font-size: 1.05rem;
@@ -928,7 +933,7 @@
         }
 
         .btn-wa-big:hover {
-            background: var(--red-dark);
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(236, 50, 56, 0.4);
         }
@@ -1218,7 +1223,7 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.3rem;
+                font-size: 2.8rem;
             }
 
             h2 {
