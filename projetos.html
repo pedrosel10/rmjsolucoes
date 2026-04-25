@@ -52,7 +52,8 @@
             padding: 0;
         }
 
-        html, body {
+        html,
+        body {
             overflow-x: hidden;
             width: 100%;
             position: relative;
@@ -128,7 +129,8 @@
             align-items: center;
         }
 
-        .nav-logo svg, .nav-logo img {
+        .nav-logo svg,
+        .nav-logo img {
             height: 28px;
             width: auto;
         }
@@ -941,7 +943,8 @@
             align-items: center;
         }
 
-        .footer-logo svg, .footer-logo img {
+        .footer-logo svg,
+        .footer-logo img {
             height: 24px;
             width: auto;
         }
@@ -975,9 +978,10 @@
         #galeria {
             background: var(--off-white);
             color: var(--black);
-            display: none; /* Só aparece via JS se tiver fotos */
+            display: none;
+            /* Só aparece via JS se tiver fotos */
         }
-        
+
         .gal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1046,45 +1050,89 @@
             opacity: 0;
             transition: opacity 0.8s ease;
         }
-        .fade-in.visible { opacity: 1; }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
 
         .fade-right {
             opacity: 0;
             transform: translateX(-40px);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         .fade-left {
             opacity: 0;
             transform: translateX(40px);
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .fade-left.visible { opacity: 1; transform: translateX(0); }
+
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         .scale-up {
             opacity: 0;
             transform: scale(0.9);
             transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .scale-up.visible { opacity: 1; transform: scale(1); }
 
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
+        .scale-up.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .delay-100 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-300 {
+            transition-delay: 0.3s;
+        }
 
         @keyframes heroFadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .hero-text > * {
+
+        .hero-text>* {
             animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             opacity: 0;
         }
-        .hero-text .hero-tag { animation-delay: 0.1s; }
-        .hero-text h1 { animation-delay: 0.2s; }
-        .hero-text .hero-sub { animation-delay: 0.3s; }
-        .hero-text .hero-actions { animation-delay: 0.4s; }
+
+        .hero-text .hero-tag {
+            animation-delay: 0.1s;
+        }
+
+        .hero-text h1 {
+            animation-delay: 0.2s;
+        }
+
+        .hero-text .hero-sub {
+            animation-delay: 0.3s;
+        }
+
+        .hero-text .hero-actions {
+            animation-delay: 0.4s;
+        }
+
         .hero-stats {
             animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s;
             opacity: 0;
@@ -1113,7 +1161,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .sol-card, .sol-card.dark {
+            .sol-card,
+            .sol-card.dark {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
@@ -1144,9 +1193,17 @@
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            h2 { font-size: 1.8rem; }
-            h3 { font-size: 1.4rem; }
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
 
             nav {
                 padding: 0 1.25rem;
@@ -1229,7 +1286,8 @@
             <li><a href="index.html#diferenciais">Diferenciais</a></li>
             <li><a href="index.html#parceiros">Parceiros</a></li>
         </ul>
-        <a href="https://www.instagram.com/rmjsolucoes.ind.br" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+        <a href="https://www.instagram.com/rmjsolucoes.ind.br" target="_blank" rel="noopener" class="nav-icon"
+            aria-label="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -1237,14 +1295,16 @@
                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
             </svg>
         </a>
-        <a href="https://wa.me/5547999908669?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço!" target="_blank" rel="noopener" class="nav-cta" id="nav-cta">Contato</a>
+        <a href="https://wa.me/5547999908669?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço!"
+            target="_blank" rel="noopener" class="nav-cta" id="nav-cta">Contato</a>
     </nav>
 
 
     <!-- ======= GALERIA ======= -->
     <section id="galeria" style="padding-top: 150px; min-height: 80vh; display: block;">
         <div class="container">
-            <div class="eyebrow fade-up"><span class="eyebrow-line" style="background:var(--black);"></span> Nosso Portfólio</div>
+            <div class="eyebrow fade-up"><span class="eyebrow-line" style="background:var(--black);"></span> Nosso
+                Portfólio</div>
             <h2 class="fade-up delay-100" style="color:var(--black);">Todos os projetos realizados</h2>
             <div class="gal-grid" id="galeria-grid">
                 <!-- Fotos serão inseridas aqui via JavaScript -->
@@ -1261,7 +1321,8 @@
                     propriedade rural ou indústria.</p>
             </div>
             <div class="cta-actions fade-left">
-                <a href="https://wa.me/5547999908669?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn-wa-big" id="main-cta">
+                <a href="https://wa.me/5547999908669?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                    target="_blank" rel="noopener" class="btn-wa-big" id="main-cta">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -1283,7 +1344,7 @@
                 <a href="index.html" class="footer-logo" aria-label="RMJ Soluções - Página inicial">
                     <img src="RMJ - LOGO - BRANCA.svg" alt="RMJ Soluções Logo" />
                 </a>
-                <p class="footer-copy">© 2025 Grupo RMJ Soluções · Todos os direitos reservados</p>
+                <p class="footer-copy">© 2026 Grupo RMJ Soluções · Todos os direitos reservados</p>
             </div>
             <ul class="footer-links">
                 <li><a href="index.html#solucoes">Soluções</a></li>
@@ -1291,7 +1352,8 @@
                 <li><a href="index.html#quemsomos">Quem somos</a></li>
                 <li><a href="index.html#diferenciais">Diferenciais</a></li>
                 <li><a href="index.html#parceiros">Parceiros</a></li>
-                <li><a href="https://wa.me/5547999908669?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço!" target="_blank" rel="noopener">Contato</a></li>
+                <li><a href="https://wa.me/5547999908669?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20seu%20serviço!"
+                        target="_blank" rel="noopener">Contato</a></li>
             </ul>
         </div>
     </footer>
