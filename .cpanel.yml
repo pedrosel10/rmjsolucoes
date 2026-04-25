@@ -1,5 +1,5 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/rmjsoluc/public_html/sitenovo/
+    - export DEPLOYPATH=/home/rmjsoluc/public_html/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R * $DEPLOYPATH
