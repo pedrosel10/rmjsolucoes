@@ -545,6 +545,7 @@
         .sol-card.dark {
             background: var(--black-soft);
             border: 1px solid rgba(255, 255, 255, 0.06);
+            grid-template-columns: 1fr 1fr;
         }
 
         .sol-card.dark h3 {
@@ -975,6 +976,7 @@
             display: flex;
             gap: 1.5rem;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -1096,7 +1098,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .sol-card {
+            .sol-card, .sol-card.dark {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
@@ -1148,7 +1150,7 @@
             }
 
             #hero {
-                padding: 0 1.25rem 3rem;
+                padding: 100px 1.25rem 3rem;
             }
 
             .hero-content {
@@ -1158,6 +1160,10 @@
 
             .hero-stats {
                 width: 100%;
+            }
+
+            .hero-stats .stat-num {
+                font-size: 3rem;
             }
 
             .sol-header {
@@ -1324,7 +1330,7 @@
                 </div>
 
                 <!-- Card 2 – dark -->
-                <div class="sol-card dark fade-up" style="grid-template-columns:1fr 1fr;">
+                <div class="sol-card dark fade-up">
                     <div class="card-img" style="order:-1;">
                         <img src="img 02.webp"
                             alt="Estrutura metálica industrial de grande porte em construção" loading="lazy">
