@@ -1028,134 +1028,9 @@
         }
 
         /* ============================================================ */
-        /* ANIMATIONS */
+        /* ANIMATIONS (via GSAP) */
         /* ============================================================ */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-up:nth-child(1) {
-            transition-delay: 0s;
-        }
-
-        .fade-up:nth-child(2) {
-            transition-delay: 0.1s;
-        }
-
-        .fade-up:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-
-        .fade-up:nth-child(4) {
-            transition-delay: 0.3s;
-        }
-
-        .fade-up:nth-child(5) {
-            transition-delay: 0.4s;
-        }
-
-        .fade-up:nth-child(6) {
-            transition-delay: 0.5s;
-        }
-
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-        }
-
-        .fade-right {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-left {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-up {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .scale-up.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .delay-100 {
-            transition-delay: 0.1s;
-        }
-
-        .delay-200 {
-            transition-delay: 0.2s;
-        }
-
-        .delay-300 {
-            transition-delay: 0.3s;
-        }
-
-        @keyframes heroFadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-text>* {
-            animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            opacity: 0;
-        }
-
-        .hero-text .hero-tag {
-            animation-delay: 0.1s;
-        }
-
-        .hero-text h1 {
-            animation-delay: 0.2s;
-        }
-
-        .hero-text .hero-sub {
-            animation-delay: 0.3s;
-        }
-
-        .hero-text .hero-actions {
-            animation-delay: 0.4s;
-        }
-
-        .hero-stats {
-            animation: heroFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s;
-            opacity: 0;
-        }
+        .word { display: inline-block; }
 
         /* decorative number */
         .bg-num {
@@ -1379,15 +1254,82 @@
 
 
     <!-- ======= SCRIPTS ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-        // Scroll-triggered animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
+        gsap.registerPlugin(ScrollTrigger);
 
-        document.querySelectorAll('.fade-up, .fade-in, .fade-right, .fade-left, .scale-up').forEach(el => observer.observe(el));
+        // ── 2. Text Splitting ──────────────────────────────────────────
+        function splitText(selector) {
+            document.querySelectorAll(selector).forEach(el => {
+                const words = el.innerText.split(' ');
+                el.innerHTML = words.map(w =>
+                    `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;"><span class="word" style="display:inline-block;">${w}</span></span>`
+                ).join(' ');
+            });
+        }
+        splitText('#hero h1');
+        splitText('section h2');
 
-        // Nav background
+        // ── 3. Hero Entrance Timeline ─────────────────────────────────
+        gsap.set('#hero h1 .word', { y: '110%', opacity: 0 });
+        gsap.set('.hero-tag, .hero-sub, .hero-actions', { y: 24, opacity: 0 });
+        gsap.set('.hero-stats', { y: 32, opacity: 0 });
+
+        const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+        heroTl
+            .from('.hero-bg', { scale: 1.15, duration: 2.2, ease: 'power2.out' })
+            .to('#hero h1 .word', { y: 0, opacity: 1, stagger: 0.08, duration: 1.1 }, '-=1.9')
+            .to('.hero-tag', { y: 0, opacity: 1, duration: 0.8 }, '-=1.1')
+            .to('.hero-sub', { y: 0, opacity: 1, duration: 0.8 }, '-=0.65')
+            .to('.hero-actions', { y: 0, opacity: 1, duration: 0.8 }, '-=0.65')
+            .to('.hero-stats', { y: 0, opacity: 1, duration: 0.9 }, '-=0.8');
+
+        // ── 4. Hero Parallax: removido (fundo fica estático com zoom) ───
+
+        // ── 5. Section H2 Word Reveal ────────────────────────────────
+        document.querySelectorAll('section h2').forEach(el => {
+            gsap.from(el.querySelectorAll('.word'), {
+                y: '110%', opacity: 0, stagger: 0.07, duration: 0.9, ease: 'power4.out',
+                scrollTrigger: { trigger: el, start: 'top 88%' }
+            });
+        });
+
+        // ── 6. Scroll Animations (fade-up / right / left / scale) ────
+        document.querySelectorAll('.fade-up, .fade-in, .fade-right, .fade-left, .scale-up').forEach(el => {
+            let fromVars = { opacity: 0 };
+            let toVars   = { opacity: 1, duration: 1, ease: 'power3.out',
+                             scrollTrigger: { trigger: el, start: 'top 88%' } };
+            if (el.classList.contains('fade-up'))    { fromVars.y = 50;      toVars.y = 0; }
+            if (el.classList.contains('fade-right')) { fromVars.x = -50;     toVars.x = 0; }
+            if (el.classList.contains('fade-left'))  { fromVars.x =  50;     toVars.x = 0; }
+            if (el.classList.contains('scale-up'))   { fromVars.scale = 0.9; toVars.scale = 1; }
+            gsap.set(el, fromVars);
+            gsap.to(el, toVars);
+        });
+
+        // ── 7. Decorative Number Slide ────────────────────────────────
+        gsap.from('.bg-num', {
+            x: 80, opacity: 0, duration: 1.6, ease: 'power3.out',
+            scrollTrigger: { trigger: '.bg-num', start: 'top 90%' }
+        });
+
+        // ── 8. Magnetic Buttons ───────────────────────────────────────
+        document.querySelectorAll('.nav-icon, .nav-cta, .btn-primary, .btn-outline, .wa-btn, .btn-wa-big').forEach(el => {
+            el.addEventListener('mousemove', function(e) {
+                const r = el.getBoundingClientRect();
+                gsap.to(el, {
+                    x: (e.clientX - r.left - r.width  / 2) * 0.35,
+                    y: (e.clientY - r.top  - r.height / 2) * 0.35,
+                    duration: 0.4, ease: 'power2.out'
+                });
+            });
+            el.addEventListener('mouseleave', () =>
+                gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.35)' })
+            );
+        });
+
+        // ── 9. Nav Scroll Background ──────────────────────────────────
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.style.background = window.scrollY > 60
@@ -1395,7 +1337,7 @@
                 : 'rgba(10,10,12,0.7)';
         }, { passive: true });
 
-        // Counter animation
+        // ── 10. Counter ───────────────────────────────────────────────
         function animateCounter(el, target, duration = 1600) {
             let start = 0;
             const step = target / (duration / 16);
@@ -1405,21 +1347,19 @@
                 if (start >= target) clearInterval(timer);
             }, 16);
         }
-
         const counter = document.getElementById('stat-counter');
         const cObs = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) { animateCounter(counter, 2000); cObs.disconnect(); }
         }, { threshold: 0.5 });
         if (counter) cObs.observe(counter);
 
-        // Nav hover indicator
+        // ── 11. Nav Hover Indicator ───────────────────────────────────
         const navLinksList = document.querySelector('.nav-links');
         const navLinksItems = document.querySelectorAll('.nav-links a');
         if (navLinksList && navLinksItems.length > 0) {
             const indicator = document.createElement('li');
             indicator.className = 'nav-indicator';
             navLinksList.appendChild(indicator);
-
             navLinksItems.forEach(link => {
                 link.addEventListener('mouseenter', () => {
                     const rect = link.getBoundingClientRect();
@@ -1429,34 +1369,36 @@
                     indicator.style.opacity = '1';
                 });
             });
-
-            navLinksList.addEventListener('mouseleave', () => {
-                indicator.style.opacity = '0';
-            });
+            navLinksList.addEventListener('mouseleave', () => { indicator.style.opacity = '0'; });
         }
 
-        // Galeria fetch
+        // ── 12. Galeria fetch + Clip-path Reveal ─────────────────────
         fetch('api.php')
             .then(res => res.json())
             .then(images => {
                 const galSection = document.getElementById('galeria');
-                const galGrid = document.getElementById('galeria-grid');
+                const galGrid    = document.getElementById('galeria-grid');
                 if (images && images.length > 0) {
                     galSection.style.display = 'block';
-                    images.forEach((src, index) => {
-                        const delay = (index % 4) * 100;
+                    images.forEach((src) => {
                         galGrid.innerHTML += `
-                            <div class="gal-item fade-up" style="transition-delay: ${delay}ms;">
+                            <div class="gal-item" style="clip-path:inset(100% 0% 0% 0%);opacity:0;">
                                 <img src="${src}" alt="Projeto RMJ Soluções" loading="lazy">
                             </div>
                         `;
                     });
                     setTimeout(() => {
-                        document.querySelectorAll('#galeria .fade-up').forEach(el => observer.observe(el));
+                        document.querySelectorAll('#galeria .gal-item').forEach(el => {
+                            gsap.to(el, {
+                                clipPath: 'inset(0% 0% 0% 0%)', opacity: 1,
+                                duration: 1.2, ease: 'power4.out',
+                                scrollTrigger: { trigger: el, start: 'top 92%' }
+                            });
+                        });
                     }, 100);
                 }
             })
-            .catch(err => console.log('Galeria: api.php não encontrada ou servidor local.', err));
+            .catch(err => console.log('Galeria: api.php não encontrada.', err));
     </script>
 
 </body>
