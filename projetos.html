@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RMJ Soluções – Estruturas para Indústria, Agro e Comércio</title>
     <meta name="description"
-        content="O Grupo RMJ Soluções é especializado em projetos de estruturas metálicas, estufas agrícolas, telados e galpões para o setor industrial, agrícola e comercial. Solicite um orçamento.">
+        content="A RMJ Soluções LTDA é especializada em projetos de estruturas metálicas, estufas agrícolas, telados e galpões para o setor industrial, agrícola e comercial. Solicite um orçamento.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -1030,7 +1030,9 @@
         /* ============================================================ */
         /* ANIMATIONS (via GSAP) */
         /* ============================================================ */
-        .word { display: inline-block; }
+        .word {
+            display: inline-block;
+        }
 
         /* decorative number */
         .bg-num {
@@ -1238,7 +1240,7 @@
                 <a href="https://rmjsolucoes.ind.br" class="footer-logo" aria-label="RMJ Soluções - Página inicial">
                     <img src="RMJ - LOGO - BRANCA.svg" alt="RMJ Soluções Logo" />
                 </a>
-                <p class="footer-copy">© 2026 Grupo RMJ Soluções · Todos os direitos reservados</p>
+                <p class="footer-copy">© 2026 RMJ Soluções LTDA · Todos os direitos reservados</p>
             </div>
             <ul class="footer-links">
                 <li><a href="index.html#solucoes">Soluções</a></li>
@@ -1298,12 +1300,14 @@
         // ── 6. Scroll Animations (fade-up / right / left / scale) ────
         document.querySelectorAll('.fade-up, .fade-in, .fade-right, .fade-left, .scale-up').forEach(el => {
             let fromVars = { opacity: 0 };
-            let toVars   = { opacity: 1, duration: 1, ease: 'power3.out',
-                             scrollTrigger: { trigger: el, start: 'top 88%' } };
-            if (el.classList.contains('fade-up'))    { fromVars.y = 50;      toVars.y = 0; }
-            if (el.classList.contains('fade-right')) { fromVars.x = -50;     toVars.x = 0; }
-            if (el.classList.contains('fade-left'))  { fromVars.x =  50;     toVars.x = 0; }
-            if (el.classList.contains('scale-up'))   { fromVars.scale = 0.9; toVars.scale = 1; }
+            let toVars = {
+                opacity: 1, duration: 1, ease: 'power3.out',
+                scrollTrigger: { trigger: el, start: 'top 88%' }
+            };
+            if (el.classList.contains('fade-up')) { fromVars.y = 50; toVars.y = 0; }
+            if (el.classList.contains('fade-right')) { fromVars.x = -50; toVars.x = 0; }
+            if (el.classList.contains('fade-left')) { fromVars.x = 50; toVars.x = 0; }
+            if (el.classList.contains('scale-up')) { fromVars.scale = 0.9; toVars.scale = 1; }
             gsap.set(el, fromVars);
             gsap.to(el, toVars);
         });
@@ -1316,11 +1320,11 @@
 
         // ── 8. Magnetic Buttons ───────────────────────────────────────
         document.querySelectorAll('.nav-icon, .nav-cta, .btn-primary, .btn-outline, .wa-btn, .btn-wa-big').forEach(el => {
-            el.addEventListener('mousemove', function(e) {
+            el.addEventListener('mousemove', function (e) {
                 const r = el.getBoundingClientRect();
                 gsap.to(el, {
-                    x: (e.clientX - r.left - r.width  / 2) * 0.35,
-                    y: (e.clientY - r.top  - r.height / 2) * 0.35,
+                    x: (e.clientX - r.left - r.width / 2) * 0.35,
+                    y: (e.clientY - r.top - r.height / 2) * 0.35,
                     duration: 0.4, ease: 'power2.out'
                 });
             });
@@ -1377,7 +1381,7 @@
             .then(res => res.json())
             .then(images => {
                 const galSection = document.getElementById('galeria');
-                const galGrid    = document.getElementById('galeria-grid');
+                const galGrid = document.getElementById('galeria-grid');
                 if (images && images.length > 0) {
                     galSection.style.display = 'block';
                     images.forEach((src) => {
