@@ -44,6 +44,25 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_
     }
 }
 
+$featuredFile = 'featured.json';
+$featuredPhotos = [];
+if (file_exists($featuredFile)) {
+    $featuredPhotos = json_decode(file_get_contents($featuredFile), true) ?: [];
+}
+
+// Processar Destaques
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_POST['save_featured'])) {
+    $selected = isset($_POST['featured']) ? $_POST['featured'] : [];
+    if (count($selected) > 4) {
+        $selected = array_slice($selected, 0, 4);
+        $error = "Apenas 4 fotos podem ser selecionadas. As 4 primeiras foram salvas.";
+    } else {
+        $msg = "Fotos em destaque atualizadas!";
+    }
+    file_put_contents($featuredFile, json_encode($selected));
+    $featuredPhotos = $selected;
+}
+
 // Processar Exclusão
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_POST['delete'])) {
     $fileToDelete = $_POST['delete'];
@@ -51,6 +70,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_
     if (file_exists($fileToDelete) && strpos($fileToDelete, 'uploads/') === 0) {
         unlink($fileToDelete);
         $msg = "Foto removida com sucesso!";
+        if (($key = array_search($fileToDelete, $featuredPhotos)) !== false) {
+            unset($featuredPhotos[$key]);
+            $featuredPhotos = array_values($featuredPhotos);
+            file_put_contents($featuredFile, json_encode($featuredPhotos));
+        }
     }
 }
 ?>
@@ -176,31 +200,46 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_
             </form>
 
             <h3 style="margin-top:3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">Fotos Publicadas</h3>
-            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">Estas são as fotos que estão aparecendo no site atualmente.</p>
+            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem;">Estas são as fotos que estão aparecendo no site atualmente. Marque até 4 fotos para aparecerem primeiro e clique em "Salvar Destaques".</p>
             
-            <div class="gallery">
-                <?php
-                if (is_dir($uploadDir)) {
-                    $files = scandir($uploadDir);
-                    $hasImages = false;
-                    foreach ($files as $file) {
-                        if ($file !== '.' && $file !== '..') {
+            <form method="POST">
+                <button type="submit" name="save_featured" value="1" style="background:#3C58A5; width: auto; padding: 0.6rem 1.2rem; font-size: 0.9rem; margin-bottom: 1.5rem; display: inline-block;">Salvar Destaques (Máx 4)</button>
+                <div class="gallery">
+                    <?php
+                    if (is_dir($uploadDir)) {
+                        $files = scandir($uploadDir);
+                        $hasImages = false;
+                        
+                        $imageFiles = [];
+                        foreach ($files as $file) {
+                            if ($file !== '.' && $file !== '..') {
+                                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                                if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
+                                    $imageFiles[] = $file;
+                                }
+                            }
+                        }
+                        rsort($imageFiles);
+
+                        foreach ($imageFiles as $file) {
                             $hasImages = true;
+                            $filePath = $uploadDir . $file;
+                            $isChecked = in_array($filePath, $featuredPhotos) ? 'checked' : '';
                             echo "<div class='img-wrap'>
-                                    <img src='$uploadDir$file' alt='Foto da galeria' loading='lazy'>
-                                    <form method='POST' style='margin:0;' onsubmit='return confirm(\"Tem certeza que deseja apagar esta foto?\");'>
-                                        <input type='hidden' name='delete' value='$uploadDir$file'>
-                                        <button type='submit' class='del-btn' title='Apagar foto'>✕</button>
-                                    </form>
+                                    <img src='$filePath' alt='Foto da galeria' loading='lazy'>
+                                    <div style='position:absolute; bottom:5px; left:5px; background:rgba(0,0,0,0.7); padding:4px 8px; border-radius:4px; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;'>
+                                        <input type='checkbox' name='featured[]' value='$filePath' $isChecked style='margin:0; width:14px; height:14px;'> Destaque
+                                    </div>
+                                    <button type='submit' name='delete' value='$filePath' class='del-btn' title='Apagar foto' formnovalidate onclick='return confirm(\"Tem certeza que deseja apagar esta foto?\");'>✕</button>
                                   </div>";
                         }
+                        if (!$hasImages) {
+                            echo "<p style='grid-column: 1 / -1; color: rgba(255,255,255,0.4); text-align: center; padding: 2rem 0;'>Nenhuma foto publicada ainda.</p>";
+                        }
                     }
-                    if (!$hasImages) {
-                        echo "<p style='grid-column: 1 / -1; color: rgba(255,255,255,0.4); text-align: center; padding: 2rem 0;'>Nenhuma foto publicada ainda.</p>";
-                    }
-                }
-                ?>
-            </div>
+                    ?>
+                </div>
+            </form>
         <?php endif; ?>
     </div>
 </body>
