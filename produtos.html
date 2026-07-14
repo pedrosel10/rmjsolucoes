@@ -1063,8 +1063,13 @@
             flex-direction: column;
             transition: transform 0.3s;
         }
-        .produto-card:hover {
-            transform: translateY(-5px);
+        @media (hover: hover) {
+            .produto-card:hover {
+                transform: translateY(-5px);
+            }
+            .produto-card:hover .prod-img-wrap img {
+                transform: scale(1.05);
+            }
         }
         .prod-img-wrap {
             width: 100%;
@@ -1077,9 +1082,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s;
-        }
-        .produto-card:hover .prod-img-wrap img {
-            transform: scale(1.05);
         }
         .prod-info {
             padding: 1.5rem;
